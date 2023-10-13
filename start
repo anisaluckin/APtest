@@ -5,4 +5,10 @@ set -o nounset
 
 python manage.py migrate
 
+if [ -n "${LOAD_INITIAL_DATA}" ]; then
+
+    echo 'Loading initial data'
+    python manage.py loaddata initial_data.json
+fi
+
 gunicorn audienceplatformtest.wsgi:application -w 2 -t 400 -b 0.0.0.0:8080 --reload
