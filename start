@@ -1,0 +1,8 @@
+#!/bin/sh
+
+set -o errexit
+set -o nounset
+
+python manage.py migrate
+
+gunicorn audienceplatformtest.wsgi:application -w 2 -t 400 -b 0.0.0.0:8080 --reload

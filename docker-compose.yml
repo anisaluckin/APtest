@@ -1,0 +1,33 @@
+version: '3.4'
+
+volumes:
+  redis_volume:
+
+services:
+  db:
+    image: mdillon/postgis
+    ports:
+      - 5432:5432
+    restart: always
+    env_file:
+      - ./.envs/.local/.postgres
+  web:
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: /start
+    volumes:
+      - .:/code
+      - ./logs:/code/logs
+      - ./api/index:/code/api/index
+    ports:
+      - '8080:8080'
+    depends_on:
+      - db
+    links:
+      - db
+    env_file:
+      - ./.envs/.local/.web
+      - ./.envs/.local/.postgres
+

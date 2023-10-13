@@ -1,0 +1,71 @@
+[
+  {
+    "model": "audienceplatformtest.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$DjrBaSA215PMei3OHuitUd$o1Nm2NyyUJ2D06WjbGP7o+UuH161iKMWfcs6AIx9o9I=",
+      "last_login": null,
+      "is_superuser": true,
+      "email": "admin@mail.com",
+      "bio": "",
+      "is_staff": true,
+      "is_active": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "audienceplatformtest.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$shFGOihV9Xusv8avF8dJTZ$Y86Ff8PG9wG8C3E6FTR+Q5OQ8baU1zlTPnG5Gu7Bkak=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "test@mail.com",
+      "bio": "",
+      "is_staff": false,
+      "is_active": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "audienceplatformtest.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$260000$ujYdLwdHVVXs117zJTFNQz$+cr1Yfk8NUPUJPHCYQWtOpgm/cBm9xTeTvJUY44VSrI=",
+      "last_login": null,
+      "is_superuser": false,
+      "email": "test1@mail.com",
+      "bio": "",
+      "is_staff": false,
+      "is_active": true,
+      "groups": [],
+      "user_permissions": []
+    }
+  },
+  {
+    "model": "audienceplatformtest.video",
+    "pk": 1,
+    "fields": {
+      "name": "Test1",
+      "url": null
+    }
+  },
+  {
+    "model": "audienceplatformtest.video",
+    "pk": 2,
+    "fields": {
+      "name": "Test2",
+      "url": null
+    }
+  },
+  {
+    "model": "audienceplatformtest.video",
+    "pk": 3,
+    "fields": {
+      "name": "Test3",
+      "url": null
+    }
+  }
+]
