@@ -16,10 +16,11 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path
-from django.views.decorators.csrf import csrf_exempt
+from django.conf.urls.static import static
 
 from rest_framework_simplejwt import views as jwt_views
 
+from audienceplatformtest import settings
 from audienceplatformtest.views.registration import Registration
 from audienceplatformtest.views.video import VideoListView, AdminVideoView, VideoView, CreateVideoView
 
@@ -32,3 +33,5 @@ urlpatterns = [
     url(r'^video/?$', CreateVideoView.as_view()),
     url(r'^video/admin/?$', AdminVideoView.as_view()),
 ]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

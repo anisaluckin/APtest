@@ -1,3 +1,5 @@
+import uuid
+
 from rest_framework import status
 from rest_framework.generics import ListAPIView, GenericAPIView
 from rest_framework.pagination import LimitOffsetPagination
@@ -5,8 +7,9 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
+from audienceplatformtest.HybridStorage import default_hybrid_storage
 from audienceplatformtest.models.video import Video
-from audienceplatformtest.serializers.video import VideoDetailsSerializer, VideoListSerializer
+from audienceplatformtest.serializers.video import VideoDetailsSerializer, VideoListSerializer, AdminVideoSerializer
 
 
 class VideoListView(ListAPIView):
@@ -65,9 +68,21 @@ class AdminVideoView(GenericAPIView):
     pagination_class = LimitOffsetPagination
 
     def post(self, request):
-        serializer = VideoDetailsSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        serializer = AdminVideoSerializer(data=request.data)
+        if serializer.is_valid(raise_exception=True):
 
-        video = Video.objects.create(**serializer.validated_data)
+            file_name = str(uuid.uuid4().hex)
 
-        return Response(VideoDetailsSerializer(video).data, status=status.HTTP_201_CREATED)
+            file = request.FILES['url']
+
+            file_path = '{}.{}'.format(file_name, 'mp4')
+
+            path = default_hybrid_storage.save(file_path, file)
+
+            url = default_hybrid_storage.url(path)
+
+            serializer.validated_data['url'] = url.replace('localstack', 'localhost')
+
+            video = Video.objects.create(**serializer.validated_data)
+
+            return Response(VideoDetailsSerializer(video).data, status=status.HTTP_200_OK)

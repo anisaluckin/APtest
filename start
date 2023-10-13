@@ -11,4 +11,6 @@ if [ -n "${LOAD_INITIAL_DATA}" ]; then
     python manage.py loaddata initial_data.json
 fi
 
+python manage.py collectstatic --noinput
+
 gunicorn audienceplatformtest.wsgi:application -w 2 -t 400 -b 0.0.0.0:8080 --reload
