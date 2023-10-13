@@ -7,7 +7,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework_simplejwt.authentication import JWTAuthentication
 
-from audienceplatformtest.HybridStorage import default_hybrid_storage
+from audienceplatformtest.utils.HybridStorage import default_hybrid_storage
 from audienceplatformtest.models.video import Video
 from audienceplatformtest.serializers.video import VideoDetailsSerializer, VideoListSerializer, AdminVideoSerializer
 
