@@ -27,7 +27,7 @@ class VideoListView(ListAPIView):
 
 class VideoView(GenericAPIView):
     """
-    Create, update or get specific video
+    Update or get specific video
     """
     authentication_classes = (JWTAuthentication, )
     permission_classes = (IsAuthenticated, )
@@ -49,6 +49,13 @@ class VideoView(GenericAPIView):
 
 
 class CreateVideoView(GenericAPIView):
+    """
+    Create video
+    """
+    authentication_classes = (JWTAuthentication, )
+    permission_classes = (IsAuthenticated, )
+    serializer_class = VideoDetailsSerializer
+    pagination_class = LimitOffsetPagination
     def post(self, request):
         serializer = VideoDetailsSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
